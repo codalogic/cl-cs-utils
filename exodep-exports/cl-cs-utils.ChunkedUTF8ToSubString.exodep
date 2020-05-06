@@ -1,0 +1,17 @@
+# See https://github.com/codalogic/exodep for details on use and format of
+# exodep file
+
+# For documentation on this project see:
+#
+#    https://github.com/codalogic/cl-cs-utils
+
+hosting github
+$owner codalogic
+$project cl-cs-utils
+$strand angst
+
+autovars
+
+versions
+
+get cl-cs-utils/ChunkedUTF8ToSubString.cs   ${cl_cs_utils_code_dst}
