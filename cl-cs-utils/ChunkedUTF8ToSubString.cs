@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cl_cs_utils2
+namespace cl_cs_utils
 {
-    public class ChunkedBytesToSubString
+    public class ChunkedUTF8ToSubString
     {
-        public ChunkedBytesToSubString()
+        public ChunkedUTF8ToSubString()
         {}
 
-        public string Transform( byte[] bytes, int length )
+        public string Transform( byte[] utf8, int length )
         {
             return "";
         }
