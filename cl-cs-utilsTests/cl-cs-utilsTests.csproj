@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ChunkedUTF8ToSubStringTests.cs" />
+    <Compile Include="HTTPUriTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

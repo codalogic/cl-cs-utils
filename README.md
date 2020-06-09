@@ -24,3 +24,7 @@ Use as:
         str += utf8ToString.Transform( utf8, count );
     }
 ```
+
+## HTTPUri
+
+A simple class for building uris for use in HTTP classes.
