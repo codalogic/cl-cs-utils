@@ -1,6 +1,6 @@
-﻿using System.Text;
-
-/*
+﻿/*
+ * Class: cl_cs_utils.ChunkedUTF8ToSubString
+ *
  * Allow blocks of bytes representing UTF-8 characters to be decoded into strings.
  *
  * An issue arises when converting blocks of UTF-8 encoded bytes into strings that
@@ -20,6 +20,8 @@
         }
  *
  */
+
+using System.Text;
 
 namespace cl_cs_utils
 {
