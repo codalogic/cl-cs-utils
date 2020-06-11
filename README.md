@@ -31,5 +31,61 @@ A simple class for building uris for use in HTTP classes.
 
 ## CodalogicException
 
-A simple class for generically forwarding exceptions, usually once locally
-captured and merged.
+A class for passing around generic exceptions.
+
+`Id` identifies the type of exception.  The idea is that the `Id` can be used
+in a `switch` statement or similar to drill down on how to handle the error.
+
+`Id` should be of the form:
+
+```
+<error name>.<class name>.<project / namespace name>.<domain>
+```
+
+e.g.:
+
+```
+no-connection.HTTPBulkUploader.cl_cs_utils.codalogic.com
+```
+
+Non-reverse domain order is chosen so the differing letters appear at the
+front of the string and so make string comparison more efficient.
+
+In a class that makes use of this class, these values would be set up as
+`public static readonly string` values, e.g.:
+
+```c#
+public static readonly string ExceptionNamespace = "cl_cs_utils.codalogic.com";
+public static readonly string ExceptionClass = $"CodalogicException.{ExceptionNamespace}";
+
+public static readonly string NullError = $"null-error.{ExceptionClass}";
+```
+
+To define an exension of this class, do similar to:
+
+```c#
+public static readonly string NoFileError = $"NoFileError.{ExceptionClass}";
+
+class NoFile : CodalogicException { public NoFile() : base( NoFileError, "No file found" ) {} }
+```
+
+The `CheckThat( bool b )` and `Throw( Exception e )` static helper methods
+allow a simple check of a boolean value and throwing an exception if the value
+is False.
+
+The code should look something like the following.
+
+In a files `using` section do:
+
+```c#
+using static cl_cs_utils.CodalogicException;
+```
+
+Then to check a value, do similar to:
+
+```c#
+CheckThat( <test term that should be True> || Throw( new NoFile().With( "Name", "/dev/null" ) );
+```
+
+The technique makes use of the || short-circuit operator to make sure
+the exception object is not created unless it is needed.

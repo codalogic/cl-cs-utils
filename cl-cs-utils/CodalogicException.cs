@@ -5,22 +5,32 @@ using System.Linq;
 
 /*
  * Class: CodalogicException
- * 
+ *
  * A class for passing around generic exceptions.
- * 
+ *
  * Id identifies the type of exception.  It should be of the form:
  * 
  *    <error name>.<class name>.<project / namespace name>.<domain>
  *
  * e.g.:
- * 
+ *
  *    no-connection.HTTPBulkUploader.cl_cs_utils.codalogic.com
- * 
+ *
  * Non-reverse domain order is chosen so the differing letters appear at the
  * front of the string and so make look-up more efficient.
- * 
+ *
  * In a class that makes use of this class, these values would be set up as
  * public static readonly string values.
+ *
+ * To define an exension of this class, do similar to:
+ *
+ *    class NoFile : CodalogicException { public NoFile( string id, string message ) : base( id, message ) {} }
+ *
+ * Or:
+ *
+ *    public static readonly string NoFileError = $"NoFileError.{ExceptionClass}";
+ *
+ *    class NoFile : CodalogicException { public NoFile() : base( NoFileError, "No file found" ) {} }
  */
 
 namespace cl_cs_utils
@@ -75,5 +85,24 @@ namespace cl_cs_utils
 
             return output;
         }
+
+        /*
+         * These helper methods allow a simple check of a boolean value and throwing an exception if the value is False.
+         *
+         * The code should look something like this...
+         *
+         * In a files "using" section do:
+         *
+         *    using static cl_cs_utils.CodalogicException;
+         *
+         * Then to check a value do similar to:
+         *
+         *    CheckThat( <test term that should be True> || Throw( new CodalogicException( CodalogicException.NullError, "It went wrong" ) );
+         *
+         * The techniques makes use of short-circuit operations to make sure
+         * the exception object is not created unless it is needed.
+         */
+        static public void CheckThat( bool b ) {}
+        static public bool Throw( Exception e ) { throw e; }
     }
 }

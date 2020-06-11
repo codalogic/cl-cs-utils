@@ -1,10 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using cl_cs_utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static cl_cs_utils.CodalogicException;
 
 namespace cl_cs_utils.Tests
 {
@@ -95,6 +91,49 @@ namespace cl_cs_utils.Tests
             var e = new CodalogicException( CodalogicException.NullError, "It went wrong" ).With( "Next", "Fred" );
 
             Assert.IsTrue( e.IsClass( CodalogicException.ExceptionClass ) );
+        }
+
+        class NoFile : CodalogicException { public NoFile() : base( CodalogicException.NullError, "It went wrong" ) {} }
+
+        [TestMethod()]
+        public void CodalogicExceptionExtendedExceptionTest()
+        {
+            try
+            {
+                Exception e = new NoFile().With( "Next", "Fred" );
+                throw e;
+                Assert.Fail();
+            }
+
+            catch( NoFile e )
+            {
+                Assert.IsTrue( e.Id == CodalogicException.NullError );
+                Assert.IsTrue( e["Next"] == "Fred" );
+            }
+            catch( Exception e )
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod()]
+        public void CodalogicExceptionCheckThatAndThrowTest()
+        {
+            try
+            {
+                CheckThat( 0 == 1 || Throw( new NoFile().With( "Next", "Fred" ) ));
+                Assert.Fail();
+            }
+
+            catch( CodalogicException e )
+            {
+                Assert.IsTrue( e.Id == CodalogicException.NullError );
+                Assert.IsTrue( e["Next"] == "Fred" );
+            }
+            catch( Exception e )
+            {
+                Assert.Fail();
+            }
         }
     }
 }
