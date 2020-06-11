@@ -28,3 +28,8 @@ Use as:
 ## HTTPUri
 
 A simple class for building uris for use in HTTP classes.
+
+## CodalogicException
+
+A simple class for generically forwarding exceptions, usually once locally
+captured and merged.
