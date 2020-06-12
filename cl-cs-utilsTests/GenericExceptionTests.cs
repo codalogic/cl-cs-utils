@@ -135,5 +135,45 @@ namespace cl_cs_utils.Tests
                 Assert.Fail();
             }
         }
+
+        [TestMethod()]
+        public void EndProgramExceptionBasicExceptionTest()
+        {
+            var e = new EndProgramException();
+
+            Assert.IsTrue( e.Id == EndProgramException.EndProgram );
+            Assert.IsTrue( e.Message == "End Program invoked" );
+            Assert.IsTrue( e.ToString() == "End Program invoked" );
+        }
+
+        [TestMethod()]
+        public void EndProgramExceptionWithMessageExceptionTest()
+        {
+            var e = new EndProgramException( "It went wrong" );
+
+            Assert.IsTrue( e.Id == EndProgramException.EndProgram );
+            Assert.IsTrue( e.Message == "It went wrong" );
+            Assert.IsTrue( e.ToString() == "It went wrong" );
+        }
+
+        [TestMethod()]
+        public void EndTaskExceptionBasicExceptionTest()
+        {
+            var e = new EndTaskException();
+
+            Assert.IsTrue( e.Id == EndTaskException.EndTask );
+            Assert.IsTrue( e.Message == "End Task invoked" );
+            Assert.IsTrue( e.ToString() == "End Task invoked" );
+        }
+
+        [TestMethod()]
+        public void EndTaskExceptionWithMessageExceptionTest()
+        {
+            var e = new EndTaskException( "It went wrong" );
+
+            Assert.IsTrue( e.Id == EndTaskException.EndTask );
+            Assert.IsTrue( e.Message == "It went wrong" );
+            Assert.IsTrue( e.ToString() == "It went wrong" );
+        }
     }
 }

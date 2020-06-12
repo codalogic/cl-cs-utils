@@ -35,6 +35,28 @@ using System.Linq;
 
 namespace cl_cs_utils
 {
+    public class EndProgramException : GenericException
+    {
+        new public static readonly string ExceptionNamespace = "cl_cs_utils.codalogic.com";
+        new public static readonly string ExceptionClass = $"EndProgramException.{ExceptionNamespace}";
+
+        public static readonly string EndProgram = $"EndProgram.{ExceptionClass}";
+
+        public EndProgramException() : this( "End Program invoked" ) {}
+        public EndProgramException( string message ) : base( EndProgram, message ) {}
+    }
+
+    public class EndTaskException : GenericException
+    {
+        new public static readonly string ExceptionNamespace = "cl_cs_utils.codalogic.com";
+        new public static readonly string ExceptionClass = $"EndTaskException.{ExceptionNamespace}";
+
+        public static readonly string EndTask = $"EndTask.{ExceptionClass}";
+
+        public EndTaskException() : this( "End Task invoked" ) {}
+        public EndTaskException( string message ) : base( EndTask, message ) {}
+    }
+
     public class GenericException : Exception
     {
         public static readonly string ExceptionNamespace = "cl_cs_utils.codalogic.com";
