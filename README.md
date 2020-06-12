@@ -29,7 +29,7 @@ Use as:
 
 A simple class for building uris for use in HTTP classes.
 
-## CodalogicException
+## GenericException
 
 A class for passing around generic exceptions.
 
@@ -56,7 +56,7 @@ In a class that makes use of this class, these values would be set up as
 
 ```c#
 public static readonly string ExceptionNamespace = "cl_cs_utils.codalogic.com";
-public static readonly string ExceptionClass = $"CodalogicException.{ExceptionNamespace}";
+public static readonly string ExceptionClass = $"GenericException.{ExceptionNamespace}";
 
 public static readonly string NullError = $"null-error.{ExceptionClass}";
 ```
@@ -66,7 +66,7 @@ To define an exension of this class, do similar to:
 ```c#
 public static readonly string NoFileError = $"NoFileError.{ExceptionClass}";
 
-class NoFile : CodalogicException { public NoFile() : base( NoFileError, "No file found" ) {} }
+class NoFile : GenericException { public NoFile() : base( NoFileError, "No file found" ) {} }
 ```
 
 The `CheckThat( bool b )` and `Throw( Exception e )` static helper methods
@@ -78,7 +78,7 @@ The code should look something like the following.
 In a files `using` section do:
 
 ```c#
-using static cl_cs_utils.CodalogicException;
+using static cl_cs_utils.GenericException;
 ```
 
 Then to check a value, do similar to:

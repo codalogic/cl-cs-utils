@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 /*
- * Class: CodalogicException
+ * Class: GenericException
  *
  * A class for passing around generic exceptions.
  *
@@ -24,30 +24,30 @@ using System.Linq;
  *
  * To define an exension of this class, do similar to:
  *
- *    class NoFile : CodalogicException { public NoFile( string id, string message ) : base( id, message ) {} }
+ *    class NoFile : GenericException { public NoFile( string id, string message ) : base( id, message ) {} }
  *
  * Or:
  *
  *    public static readonly string NoFileError = $"NoFileError.{ExceptionClass}";
  *
- *    class NoFile : CodalogicException { public NoFile() : base( NoFileError, "No file found" ) {} }
+ *    class NoFile : GenericException { public NoFile() : base( NoFileError, "No file found" ) {} }
  */
 
 namespace cl_cs_utils
 {
-    public class CodalogicException : Exception
+    public class GenericException : Exception
     {
         public static readonly string ExceptionNamespace = "cl_cs_utils.codalogic.com";
-        public static readonly string ExceptionClass = $"CodalogicException.{ExceptionNamespace}";
+        public static readonly string ExceptionClass = $"GenericException.{ExceptionNamespace}";
 
         public static readonly string NullError = $"null-error.{ExceptionClass}";
 
-        public CodalogicException( string id, string message ) : base( message )
+        public GenericException( string id, string message ) : base( message )
         {
             Id = id;
         }
 
-        public CodalogicException With<T>( string key, T value )
+        public GenericException With<T>( string key, T value )
         {
             Data.Add( key, value );
             return this;
@@ -93,11 +93,11 @@ namespace cl_cs_utils
          *
          * In a files "using" section do:
          *
-         *    using static cl_cs_utils.CodalogicException;
+         *    using static cl_cs_utils.GenericException;
          *
          * Then to check a value do similar to:
          *
-         *    CheckThat( <test term that should be True> || Throw( new CodalogicException( CodalogicException.NullError, "It went wrong" ) );
+         *    CheckThat( <test term that should be True> || Throw( new GenericException( GenericException.NullError, "It went wrong" ) );
          *
          * The techniques makes use of short-circuit operations to make sure
          * the exception object is not created unless it is needed.

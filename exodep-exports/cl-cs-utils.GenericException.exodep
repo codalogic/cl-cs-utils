@@ -14,4 +14,4 @@ autovars
 
 versions
 
-get cl-cs-utils/CodalogicException.cs   ${cl_cs_utils_code_dst}
+get cl-cs-utils/GenericException.cs   ${cl_cs_utils_code_dst}
