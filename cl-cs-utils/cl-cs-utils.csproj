@@ -45,6 +45,7 @@
     <Compile Include="ChunkedUTF8ToSubString.cs" />
     <Compile Include="GenericException.cs" />
     <Compile Include="HTTPUri.cs" />
+    <Compile Include="MostRecentlyUsed.cs" />
     <Compile Include="ProgramMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

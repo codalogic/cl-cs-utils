@@ -89,3 +89,22 @@ CheckThat( <test term that should be True> || Throw( new NoFile().With( "Name", 
 
 The technique makes use of the || short-circuit operator to make sure
 the exception object is not created unless it is needed.
+
+## MostRecentlyUsed
+
+Keeps track of most recently used strings for use in pull-down list boxes.
+
+```c#
+var mru = new MostRecentlyUsed( MRUFile );
+
+Assert.AreEqual( 0, mru.Count );
+
+mru.Update( "A" );
+mru.Update( "B" );
+Assert.AreEqual( 2, mru.Count );
+Assert.AreEqual( "B", mru[0] );
+Assert.AreEqual( "A", mru[1] );
+
+foreach( string s in mru )
+    ...;
+```

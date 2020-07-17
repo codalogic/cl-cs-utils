@@ -59,6 +59,7 @@
     <Compile Include="ChunkedUTF8ToSubStringTests.cs" />
     <Compile Include="GenericExceptionTests.cs" />
     <Compile Include="HTTPUriTests.cs" />
+    <Compile Include="MostRecentlyUsedTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
