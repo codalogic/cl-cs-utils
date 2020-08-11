@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CapturedError.cs" />
     <Compile Include="ChunkedUTF8ToSubString.cs" />
     <Compile Include="GenericException.cs" />
     <Compile Include="HTTPUri.cs" />

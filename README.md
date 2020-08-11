@@ -108,3 +108,66 @@ Assert.AreEqual( "A", mru[1] );
 foreach( string s in mru )
     ...;
 ```
+
+## CapturedError
+
+`CapturedError` is a class for recording an error condition for passing up the
+function calling to hierachy for display or interpretation.
+
+One usage scenario is for `CapturedError` to be a member of a class that has a
+number of methods implementing the functionality. The object scoped instance is
+tested at regular locations to test if an error has occurred and can be set
+when an error occurs.
+
+A `CapturedError` object can record the error condition as a message
+and/or a code.
+
+`CapturedError` can be constructed with a *category* value that can be used
+to compartmentalise returned errors when processing.  For example:
+
+```c#
+readonly string FileIOErrorCategory = "FileIO";
+var ce = CapturedError( FileIOErrorCategory );
+```
+
+Then in an error handler:
+
+```c#
+if( ce.Category == FileIOErrorCategory )
+    ...
+```
+
+The `IsOK` property returns true if no message or code has been captured and
+false otherwise.
+
+The `IsErrored` property returns true is either a message or code has been
+captured.
+
+The message is set using the `ErrorMessage( string format )` and
+`ErrorMessage( string format, params object[] args )` methods. The latter
+formats the message with the supplied `args`.
+
+The code is set using `ErrorCode( params object [] code )`. This allows
+setting a hierachy of error code.
+
+Both can be set at the same time:
+
+```c#
+return ce.ErrorMessage( "Too many files" ).ErrorCode( "File", "TooMany" );
+```
+
+The message can be extracted using the `Message` property.
+
+The code can by tested by using the
+`bool HasCode( params object [] soughtCode )`,
+`bool IsCode( params object [] soughtCode )` and
+`object CodeAt( int index )` methods.
+
+`IsCode()` returns true if the parameters of `soughtCode` matches the
+stored code list.
+
+`HasCode()` returns true if the parameters of `soughtCode` matches the
+initial sub-set of the stored code list.
+
+`CodeAt()` returns the object at the specified index of the stored code
+or `null` if the index is too large.
