@@ -12,4 +12,4 @@ $strand angst
 
 autovars
 
-get cl-cs-utils/cl-cs-utils.CapturedError.cs   ${cl_cs_utils_code_dst}
+get cl-cs-utils/CapturedError.cs   ${cl_cs_utils_code_dst}
