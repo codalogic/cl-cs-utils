@@ -102,7 +102,7 @@ namespace cl_cs_utils.Tests
             {
                 Exception e = new NoFile().With( "Next", "Fred" );
                 throw e;
-                Assert.Fail();
+                //Assert.Fail();
             }
 
             catch( NoFile e )
@@ -110,7 +110,7 @@ namespace cl_cs_utils.Tests
                 Assert.IsTrue( e.Id == GenericException.NullError );
                 Assert.IsTrue( e["Next"] == "Fred" );
             }
-            catch( Exception e )
+            catch( Exception )
             {
                 Assert.Fail();
             }
@@ -130,7 +130,7 @@ namespace cl_cs_utils.Tests
                 Assert.IsTrue( e.Id == GenericException.NullError );
                 Assert.IsTrue( e["Next"] == "Fred" );
             }
-            catch( Exception e )
+            catch( Exception )
             {
                 Assert.Fail();
             }
