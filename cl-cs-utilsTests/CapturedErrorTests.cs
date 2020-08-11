@@ -50,6 +50,14 @@ namespace cl_cs_utils.Tests
         }
 
         [TestMethod()]
+        public void CapturedErrorHasMessageTest()
+        {
+            var ce = new CapturedError();
+            ce.ErrorMessage( "It's too late" );
+            Assert.IsTrue( ce.HasMessage() );
+        }
+
+        [TestMethod()]
         public void CapturedErrorMessageTest()
         {
             var ce = new CapturedError();
@@ -63,6 +71,46 @@ namespace cl_cs_utils.Tests
             var ce = new CapturedError();
             ce.ErrorMessage( "It's too late {0} and {1}", "p1", 2 );
             Assert.IsTrue( ce.Message == "It's too late p1 and 2" );
+        }
+
+        [TestMethod()]
+        public void CapturedErrorHasCodeWithNoParametersTest()
+        {
+            var ce = new CapturedError();
+            ce.ErrorCode( "Level-1", "Cap", 12 );
+            Assert.IsTrue( ce.HasCode() );
+        }
+
+        [TestMethod()]
+        public void CapturedErrorHasCodeTest()
+        {
+            var ce = new CapturedError();
+            ce.ErrorCode( "Level-1", "Cap", 12 );
+            Assert.IsTrue( ce.HasCode( "Level-1", "Cap" ) );
+        }
+
+        [TestMethod()]
+        public void CapturedErrorHasCodeSoughtSameLengthTest()
+        {
+            var ce = new CapturedError();
+            ce.ErrorCode( "Level-1", "Cap", 12 );
+            Assert.IsTrue( ce.HasCode( "Level-1", "Cap", 12 ) );
+        }
+
+        [TestMethod()]
+        public void CapturedErrorHasCodeMismatchTest()
+        {
+            var ce = new CapturedError();
+            ce.ErrorCode( "Level-1", "Cap", 12 );
+            Assert.IsFalse( ce.HasCode( "Level-1", "Flip" ) );
+        }
+
+        [TestMethod()]
+        public void CapturedErrorHasCodeSoughtTooLongTest()
+        {
+            var ce = new CapturedError();
+            ce.ErrorCode( "Level-1", "Cap", 12 );
+            Assert.IsFalse( ce.HasCode( "Level-1", "Cap", 12, "List" ) );
         }
 
         [TestMethod()]
@@ -103,38 +151,6 @@ namespace cl_cs_utils.Tests
             var ce = new CapturedError();
             ce.ErrorCode( "Level-1", "Cap", 12 );
             Assert.IsFalse( ce.IsCode( "Level-1", "Cap", "12" ) );
-        }
-
-        [TestMethod()]
-        public void CapturedErrorHasCodeTest()
-        {
-            var ce = new CapturedError();
-            ce.ErrorCode( "Level-1", "Cap", 12 );
-            Assert.IsTrue( ce.HasCode( "Level-1", "Cap" ) );
-        }
-
-        [TestMethod()]
-        public void CapturedErrorHasCodeSoughtSameLengthTest()
-        {
-            var ce = new CapturedError();
-            ce.ErrorCode( "Level-1", "Cap", 12 );
-            Assert.IsTrue( ce.HasCode( "Level-1", "Cap", 12 ) );
-        }
-
-        [TestMethod()]
-        public void CapturedErrorHasCodeMismatchTest()
-        {
-            var ce = new CapturedError();
-            ce.ErrorCode( "Level-1", "Cap", 12 );
-            Assert.IsFalse( ce.HasCode( "Level-1", "Flip" ) );
-        }
-
-        [TestMethod()]
-        public void CapturedErrorHasCodeSoughtTooLongTest()
-        {
-            var ce = new CapturedError();
-            ce.ErrorCode( "Level-1", "Cap", 12 );
-            Assert.IsFalse( ce.HasCode( "Level-1", "Cap", 12, "List" ) );
         }
 
         [TestMethod()]

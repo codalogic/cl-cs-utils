@@ -156,6 +156,9 @@ Both can be set at the same time:
 return ce.ErrorMessage( "Too many files" ).ErrorCode( "File", "TooMany" );
 ```
 
+`HasMessage()` returns true if a message is set and `HasCode()` (no parameters)
+returns true if a code has been set.
+
 The message can be extracted using the `Message` property.
 
 The code can by tested by using the
@@ -167,7 +170,7 @@ The code can by tested by using the
 stored code list.
 
 `HasCode()` returns true if the parameters of `soughtCode` matches the
-initial sub-set of the stored code list.
+initial sub-set of the stored code list (or the whole set of stored codes).
 
 `CodeAt()` returns the object at the specified index of the stored code
 or `null` if the index is too large.

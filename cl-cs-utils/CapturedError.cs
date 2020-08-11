@@ -49,7 +49,17 @@ namespace cl_cs_utils
 
         public string Category { get; private set; }
 
+        public bool HasMessage()
+        {
+            return message is object;
+        }
+
         public string Message { get { return message ?? ""; } private set { message = value; } }
+
+        public bool HasCode()
+        {
+            return code is object;
+        }
 
         public bool HasCode( params object [] soughtCode )
         {
