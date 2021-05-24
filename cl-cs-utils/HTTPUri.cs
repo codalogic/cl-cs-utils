@@ -69,7 +69,7 @@ namespace cl_cs_utils
             return this;
         }
 
-        public HTTPUri WithQueryParameter( string name, string unescapedValue )
+        public HTTPUri WithQueryParameter( string name, string unescapedValue )     // May be called multiple times to add multiple query parameters
         {
             string query = name + "=" + WebUtility.UrlEncode( unescapedValue );
             if( this.queryString.Length != 0 )
