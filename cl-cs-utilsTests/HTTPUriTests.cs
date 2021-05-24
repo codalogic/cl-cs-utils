@@ -84,6 +84,27 @@ namespace cl_cs_utils.Tests
         }
 
         [TestMethod()]
+        public void HostWithResourceWithQueryStringUriTest()
+        {
+            Assert.IsTrue( new HTTPUri( "codalogic.com" ).WithResource( "foo" ).WithQueryString( "myquery" ).GetUri() == "http://codalogic.com/foo?myquery" );
+        }
+
+        [TestMethod()]
+        public void HostWithResourceWithQueryParameterOneParamUriTest()
+        {
+            Assert.IsTrue( new HTTPUri( "codalogic.com" ).WithResource( "foo" ).WithQueryParameter( "email", "test@example.com" ).GetUri() ==
+                            "http://codalogic.com/foo?email=test%40example.com" );
+        }
+
+        [TestMethod()]
+        public void HostWithResourceWithQueryParameterTwoParamaUriTest()
+        {
+            Assert.IsTrue( new HTTPUri( "codalogic.com" ).WithResource( "foo" ).
+                    WithQueryParameter( "email", "test@example.com" ).WithQueryParameter( "status", "this & that" ).GetUri() ==
+                            "http://codalogic.com/foo?email=test%40example.com&status=this+%26+that" );
+        }
+
+        [TestMethod()]
         public void HostWithSecureSchemeWithResourceWithQueryUriTest()
         {
             Assert.IsTrue( new HTTPUri( "codalogic.com" ).WithScheme( HTTPUri.Scheme.Secure ).WithResource( "foo" ).WithQuery( "myquery" ).GetUri() == "https://codalogic.com/foo?myquery" );

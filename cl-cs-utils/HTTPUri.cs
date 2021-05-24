@@ -4,6 +4,8 @@
  * A simple class for building uris for use in HTTP classes.
 */
 
+using System.Net;
+
 namespace cl_cs_utils
 {
     public class HTTPUri
@@ -13,7 +15,7 @@ namespace cl_cs_utils
         Scheme scheme = Scheme.Plain;
         string host = "";
         string resource = "";
-        string query = "";
+        string queryString = "";
 
         public HTTPUri()
         {
@@ -30,11 +32,11 @@ namespace cl_cs_utils
             this.resource = resource;
         }
 
-        public HTTPUri( string host, string resource, string query )
+        public HTTPUri( string host, string resource, string queryString )
         {
             this.host = host;
             this.resource = resource;
-            this.query = query;
+            this.queryString = queryString;
         }
 
         public HTTPUri WithScheme( Scheme scheme )
@@ -55,9 +57,24 @@ namespace cl_cs_utils
             return this;
         }
 
-        public HTTPUri WithQuery( string query )
+        public HTTPUri WithQuery( string query )    // Legacy: Preferably use WithQueryString
         {
-            this.query = query;
+            this.queryString = query;
+            return this;
+        }
+
+        public HTTPUri WithQueryString( string query )
+        {
+            this.queryString = query;
+            return this;
+        }
+
+        public HTTPUri WithQueryParameter( string name, string unescapedValue )
+        {
+            string query = name + "=" + WebUtility.UrlEncode( unescapedValue );
+            if( this.queryString.Length != 0 )
+                this.queryString += "&";
+            this.queryString += query;
             return this;
         }
 
@@ -74,8 +91,8 @@ namespace cl_cs_utils
             }
             if( resource != "" )
                 uri += "/" + resource;
-            if( query != "" )
-                uri += "?" + query;
+            if( queryString != "" )
+                uri += "?" + queryString;
             return uri;
         }
     }
